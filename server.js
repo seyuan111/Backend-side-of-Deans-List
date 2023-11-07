@@ -18,10 +18,9 @@ mongoose.connect(process.env.MONGO_URI)
 const postSchema = new mongoose.Schema({
     name: String,
     age: String,
-    major: String,
+    email: String,
     occupation: String,
-    image: String,
-    bio: String
+    contact: String
 })
 
 const Post = mongoose.model("Post", postSchema)
