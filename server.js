@@ -53,6 +53,23 @@ app.post('/posts', async (req,res) => {
     res.send(savedPost) //send result back to front-end
 })
 
+//update
+app.put('/posts/:id', async (req, res) => {
+    try {
+      const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      // The 'new' option returns the updated document
+  
+      if (!updatedPost) {
+        return res.status(404).send("Post not found");
+      }
+  
+      res.send(updatedPost);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Update failed");
+    }
+  });
+
 //delete post
 app.delete('/posts/:id', async (req,res) => {
     await Post.findByIdAndDelete(req.params.id)
